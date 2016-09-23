@@ -8,13 +8,13 @@
  *      Curl::post(string url,string|array parameters)
  *
  *    long:
- *      Curl::proxie(str proxie)->timeOut(int seconds)...->get(str url)
+ *      Curl::proxie(str proxy)->timeOut(int seconds)...->get(str url)
  *
  */
 class Curl
 {
     private static $__cookieFile = 'cookie';
-    private static $__proxie;
+    private static $__proxy;
     private static $__userAgent = 'Mozilla/5.0 (Windows; U; Windows NT 6.1; de; rv:1.9.2.24) Gecko/20111103 Firefox/3.6.24';
     private static $__compression = 1;
     private static $__timeOut = 180;
@@ -23,7 +23,7 @@ class Curl
 
     /**
      * Set proxie
-     * @param  string $proxie IP:PORT
+     * @param  string $proxy IP:PORT
      * @return new static
      */
     public static function proxie($proxie)
@@ -129,8 +129,8 @@ class Curl
                 curl_setopt($process, CURLOPT_ENCODING, self::$__compression);
                 curl_setopt($process, CURLOPT_CONNECTTIMEOUT, self::$__timeOut);
                 curl_setopt($process, CURLOPT_TIMEOUT, self::$__timeOut);
-                if (self::$__proxie) {
-                    curl_setopt($process, CURLOPT_proxie, self::$__proxie);
+                if (self::$__proxy) {
+                    curl_setopt($process, CURLOPT_proxie, self::$__proxy);
                 }
                 $content[] = curl_exec($process);
             }
@@ -147,8 +147,8 @@ class Curl
             curl_setopt($process, CURLOPT_ENCODING, self::$__compression);
             curl_setopt($process, CURLOPT_CONNECTTIMEOUT, self::$__timeOut);
             curl_setopt($process, CURLOPT_TIMEOUT, self::$__timeOut);
-            if (self::$__proxie) {
-                curl_setopt($process, CURLOPT_proxie, self::$__proxie);
+            if (self::$__proxy) {
+                curl_setopt($process, CURLOPT_proxie, self::$__proxy);
             }
             $content = curl_exec($process);
         }
@@ -172,8 +172,8 @@ class Curl
         curl_setopt($process, CURLOPT_COOKIEJAR, self::$__cookieFile);
         curl_setopt($process, CURLOPT_ENCODING, self::$__compression);
         curl_setopt($process, CURLOPT_TIMEOUT, self::$__timeOut);
-        if (self::$__proxie) {
-            curl_setopt($process, CURLOPT_proxie, self::$__proxie);
+        if (self::$__proxy) {
+            curl_setopt($process, CURLOPT_proxie, self::$__proxy);
         }
         curl_setopt($process, CURLOPT_POSTFIELDS, $data);
         curl_setopt($process, CURLOPT_RETURNTRANSFER, self::$__returnTransfer);
